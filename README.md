@@ -5,7 +5,7 @@
 
 给 AI 编码助手用的一组技能（Agent Skills）。每个技能是一个目录，目录里放一份 `SKILL.md`，写清楚它管哪类任务、按什么顺序做、输出成什么样。Claude Code、Cursor、Codex 这类支持 Agent Skills 规范的工具都能直接读，拷进对应的 skills 目录就能用。
 
-技能描述和正文用英文写，因为模型对英文指令的遵循度更稳；这份 README 用中文，方便自己回头查。
+通用技能用英文写，因为模型对英文指令的遵循度更稳；中文写作类技能（`humanize-writing`、`tech-blog-writing`）的规则本身就是中文，正文保留中文。这份 README 也用中文，方便自己回头查。
 
 ## 为什么单独建一个仓库
 
@@ -37,7 +37,8 @@
 | [`conventional-commits`](skills/conventional-commits/SKILL.md) | 从暂存区改动生成 Conventional Commits 格式的提交信息 | 提交代码、整理 changelog |
 | [`api-design-review`](skills/api-design-review/SKILL.md) | 用一份检查表审 HTTP API 的命名、状态码、分页和错误模型 | 设计新接口、评审接口文档 |
 | [`systematic-debugging`](skills/systematic-debugging/SKILL.md) | 先复现再定位，禁止靠猜改代码 | 修 bug、排查线上异常 |
-| [`technical-writing-zh`](skills/technical-writing-zh/SKILL.md) | 去掉中文技术文档里的套话和翻译腔 | 写 README、博客、发布说明 |
+| [`humanize-writing`](skills/humanize-writing/SKILL.md) | 清掉中文里的套话、翻译腔和空形容词，只管语言层 | 写或改任何中文内容、被要求“说人话” |
+| [`tech-blog-writing`](skills/tech-blog-writing/SKILL.md) | 讲机制、讲取舍的技术博客写法，图必须是真图片文件 | 写博客、做原理科普、整理架构说明 |
 
 ## 怎么用
 
