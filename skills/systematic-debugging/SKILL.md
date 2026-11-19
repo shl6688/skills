@@ -2,8 +2,9 @@
 name: systematic-debugging
 description: Diagnoses a bug by reproducing it, narrowing the failing component, forming a falsifiable hypothesis, and instrumenting before changing code, then locks the fix in with a regression test. Use when something is broken, a test fails intermittently, or a user reports behavior that cannot be reproduced yet.
 license: MIT
-version: 1.0.0
-tags: debugging,testing,incident
+metadata:
+  version: 1.0.0
+  tags: debugging, testing, incident
 ---
 
 # Systematic Debugging

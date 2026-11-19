@@ -2,8 +2,9 @@
 name: skill-template
 description: Template for a new skill. Replace this line with one single-line description of what the skill does and when it should be triggered, then rename the directory and the name field to match.
 license: MIT
-version: 1.0.0
-tags: template
+metadata:
+  version: 1.0.0
+  tags: template
 ---
 
 # Skill Title

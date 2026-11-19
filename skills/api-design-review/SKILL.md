@@ -2,8 +2,9 @@
 name: api-design-review
 description: Reviews HTTP API surface design against a checklist covering resources, methods, status codes, pagination, error models, idempotency, and versioning, and returns concrete corrections. Use when designing new endpoints, reviewing an OpenAPI spec, or fixing inconsistent API behavior.
 license: MIT
-version: 1.0.0
-tags: api,rest,http,openapi
+metadata:
+  version: 1.0.0
+  tags: api, rest, http, openapi
 ---
 
 # API Design Review

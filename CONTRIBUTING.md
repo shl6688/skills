@@ -19,11 +19,19 @@ skills/<skill-name>/
 | --- | --- | --- |
 | `name` | 是 | `^[a-z0-9]+(-[a-z0-9]+)*$`，≤ 64 字符，与目录名一致 |
 | `description` | 是 | 单行，20–1024 字符，写清「做什么 + 什么时候用」 |
-| `license` | 否 | 默认 `MIT` |
-| `version` | 否 | 语义化版本，改动较大时递增 |
-| `tags` | 否 | 逗号分隔，便于检索 |
+| `license` | 否 | SPDX 标识，本仓库统一 `MIT` |
+| `compatibility` | 否 | ≤ 500 字符，写运行环境要求 |
+| `metadata` | 否 | 字符串键值对，版本号写 `version`，标签写 `tags` |
+| `allowed-tools` | 否 | 空格分隔的预授权工具名，实验字段 |
 
-只支持这几个键，出现别的键校验会失败。需要嵌套结构就把内容写进正文。
+这六个键之外的顶层键校验会失败，因为 Agent Skills 规范没有定义它们。版本号和标签放 `metadata` 下：
+
+```yaml
+license: MIT
+metadata:
+  version: 1.2.0
+  tags: review, git
+```
 
 ## 正文怎么写
 

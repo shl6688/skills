@@ -1,6 +1,7 @@
 ---
 name: humanize-writing
 description: 消除中文文本的机械感、翻译腔与套路化表达（去 AI 味），只管语言层。撰写或润色任何中文内容时使用；用户提出“像人话”“自然一点”“去 AI 味”时同样触发。内容与结构由对应场景技能负责。
+license: MIT
 ---
 
 # 中文去“AI味” (Humanize Writing)

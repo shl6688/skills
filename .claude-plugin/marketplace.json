@@ -1,0 +1,15 @@
+{
+  "name": "shl6688-skills",
+  "description": "Personal Agent Skills maintained by shl6688, installable into Claude Code with one plugin install.",
+  "owner": {
+    "name": "shl6688",
+    "url": "https://github.com/shl6688"
+  },
+  "plugins": [
+    {
+      "name": "skills",
+      "source": "./",
+      "description": "Six Agent Skills: code review, conventional commits, API design review, systematic debugging, Chinese writing polish, and technical blog writing."
+    }
+  ]
+}

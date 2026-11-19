@@ -26,6 +26,9 @@
 │   └── skill-template/       # 新建技能先复制这个目录
 ├── scripts/
 │   └── validate-skills.mjs
+├── .claude-plugin/
+│   ├── marketplace.json      # Claude Code 插件市场清单
+│   └── plugin.json           # 插件元信息
 └── .github/workflows/validate.yml
 ```
 
@@ -40,9 +43,34 @@
 | [`humanize-writing`](skills/humanize-writing/SKILL.md) | 清掉中文里的套话、翻译腔和空形容词，只管语言层 | 写或改任何中文内容、被要求“说人话” |
 | [`tech-blog-writing`](skills/tech-blog-writing/SKILL.md) | 讲机制、讲取舍的技术博客写法，图必须是真图片文件 | 写博客、做原理科普、整理架构说明 |
 
-## 怎么用
+## 安装
 
-克隆下来，把需要的技能目录拷到工具的 skills 路径下：
+### 方式一：skills CLI（推荐）
+
+需要 Node 22.20 以上。CLI 会列出仓库里的技能，让你选装哪几个、装给哪个 agent。
+
+```bash
+npx skills add shl6688/skills --list      # 先看仓库里有什么，不安装
+npx skills add shl6688/skills -g          # 装到用户级，交互选择
+npx skills add shl6688/skills -g --skill '*' -a claude-code -y   # 全装，不提问
+```
+
+不加 `-g` 是项目级安装，落在 `./<agent>/skills/`；两种方式都会在 `.agents/skills/` 放一份共享副本。装完用 `npx skills list` 看状态，`npx skills check` 查更新，`npx skills update` 升级，`npx skills remove` 卸载。
+
+全局安装的具体落点以 CLI 版本为准，`npx skills ls -g` 会打印实际路径。本机 DSH 读的是 `~/.agents/skills/`，和 CLI 的共享目录约定一致。
+
+### 方式二：Claude Code 插件市场
+
+仓库根目录有 `.claude-plugin/marketplace.json`，可以直接当插件市场注册：
+
+```bash
+claude plugin marketplace add shl6688/skills
+claude plugin install skills@shl6688-skills
+```
+
+会话里等价：`/plugin marketplace add shl6688/skills`。插件安装后技能名带前缀，例如 `/skills:code-review`。
+
+### 方式三：手动拷
 
 ```bash
 git clone https://github.com/shl6688/skills.git
@@ -87,6 +115,16 @@ node scripts/validate-skills.mjs
 - 不写「本文将介绍」，直接给操作。
 
 细节见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+## 兼容性
+
+- 目录布局按 [Agent Skills 规范](https://agentskills.io/specification)：`skills/<name>/SKILL.md`，可选 `scripts/`、`references/`、`assets/`。
+- frontmatter 只用规范定义的字段：`name`、`description`、`license`、`compatibility`、`metadata`、`allowed-tools`。版本号和标签放进 `metadata`，不占顶层键。
+- skills CLI 在 `skills/` 下三层范围内查找 `SKILL.md`。本仓库用 `npx skills add . --list` 实测能列出全部 6 个技能。
+- `.claude-plugin/marketplace.json` 加 `plugin.json` 让同一个仓库也能作为 Claude Code 插件市场安装。
+- CI 每次 push 跑 `node scripts/validate-skills.mjs`，检查规范字段、命名、描述长度、相对链接，以及两个插件 manifest 的必填项和路径。
+
+`skills.sh` 目录站点什么时候收录新仓库不由我控制，`npx skills find` 搜不到时不影响按 `shl6688/skills` 直接安装。
 
 ## License
 

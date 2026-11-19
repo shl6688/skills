@@ -2,8 +2,9 @@
 name: code-review
 description: Reviews a git diff or pull request for correctness, security, and maintainability, and returns findings ordered by severity with path:line references and concrete fixes. Use when the user asks to review code, check a PR, or wants a merge decision.
 license: MIT
-version: 1.0.0
-tags: review,git,pull-request
+metadata:
+  version: 1.0.0
+  tags: review, git, pull-request
 ---
 
 # Code Review

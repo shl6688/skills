@@ -1,0 +1,15 @@
+{
+  "name": "skills",
+  "displayName": "Personal Skills",
+  "version": "1.1.0",
+  "description": "Personal Agent Skills: code review, conventional commits, API design review, systematic debugging, and Chinese technical writing.",
+  "author": {
+    "name": "shl6688",
+    "email": "shihualong6688@163.com",
+    "url": "https://github.com/shl6688"
+  },
+  "homepage": "https://github.com/shl6688/skills",
+  "repository": "https://github.com/shl6688/skills",
+  "license": "MIT",
+  "keywords": ["agent-skills", "code-review", "technical-writing", "debugging"]
+}

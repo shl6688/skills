@@ -2,8 +2,9 @@
 name: conventional-commits
 description: Writes commit messages and changelog entries in Conventional Commits format from a staged diff, choosing type, scope, and breaking-change markers. Use when the user asks to commit, wants a commit message, or needs release notes generated from history.
 license: MIT
-version: 1.0.0
-tags: git,changelog,commits
+metadata:
+  version: 1.0.0
+  tags: git, changelog, commits
 ---
 
 # Conventional Commits

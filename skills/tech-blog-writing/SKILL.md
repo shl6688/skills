@@ -1,6 +1,7 @@
 ---
 name: tech-blog-writing
 description: 写面向非专业读者的中文技术博客与原理科普。当用户要求写技术博客、讲解某个技术原理或机制、做架构说明、把技术素材整理成博文时使用。只管内容与结构，语言层遵循 humanize-writing 技能。
+license: MIT
 ---
 
 # 技术博客写作 (Tech Blog Writing)
