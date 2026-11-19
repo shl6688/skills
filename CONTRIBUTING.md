@@ -13,6 +13,8 @@ skills/<skill-name>/
 
 目录名就是技能名，小写字母加连字符，例如 `code-review`、`api-design-review`。
 
+`skills/` 放真正要安装的技能；`examples/` 放不参与安装的示例，格式规则一样，CI 也会校验。
+
 ## frontmatter 字段
 
 | 字段 | 必填 | 规则 |

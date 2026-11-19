@@ -5,8 +5,10 @@ on:
     branches: [main]
     paths:
       - 'skills/**'
+      - 'examples/**'
       - 'templates/**'
       - 'scripts/**'
+      - '.claude-plugin/**'
       - '.github/workflows/validate.yml'
   pull_request:
     branches: [main]
@@ -25,8 +27,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Validate skills
+      - name: Validate installable skills
         run: node scripts/validate-skills.mjs
+
+      - name: Validate examples
+        run: node scripts/validate-skills.mjs examples
 
       - name: Validate template
         run: node scripts/validate-skills.mjs templates

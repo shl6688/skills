@@ -9,7 +9,7 @@
     {
       "name": "skills",
       "source": "./",
-      "description": "Six Agent Skills: code review, conventional commits, API design review, systematic debugging, Chinese writing polish, and technical blog writing."
+      "description": "Two Agent Skills for Chinese technical writing: strip boilerplate and translationese, and write mechanism-first technical blog posts."
     }
   ]
 }

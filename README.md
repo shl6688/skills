@@ -17,11 +17,16 @@
 
 ```text
 .
-├── skills/
-│   └── <skill-name>/
-│       ├── SKILL.md          # 必需：frontmatter + 操作说明
-│       ├── references/       # 可选：需要时才读的长文
-│       └── scripts/          # 可选：可执行脚本
+├── skills/                   # 会被安装的技能
+│   ├── humanize-writing/
+│   │   └── SKILL.md
+│   └── tech-blog-writing/
+│       └── SKILL.md
+├── examples/                 # 示例技能，不参与默认安装
+│   ├── api-design-review/
+│   ├── code-review/
+│   ├── conventional-commits/
+│   └── systematic-debugging/
 ├── templates/
 │   └── skill-template/       # 新建技能先复制这个目录
 ├── scripts/
@@ -34,14 +39,23 @@
 
 ## 已收录的技能
 
+只有下面两个会被安装。
+
 | 技能 | 做什么 | 什么时候触发 |
 | --- | --- | --- |
-| [`code-review`](skills/code-review/SKILL.md) | 按严重级别审 diff，每条结论带 `path:line` 和改法 | 提 PR 前、让我看一段改动 |
-| [`conventional-commits`](skills/conventional-commits/SKILL.md) | 从暂存区改动生成 Conventional Commits 格式的提交信息 | 提交代码、整理 changelog |
-| [`api-design-review`](skills/api-design-review/SKILL.md) | 用一份检查表审 HTTP API 的命名、状态码、分页和错误模型 | 设计新接口、评审接口文档 |
-| [`systematic-debugging`](skills/systematic-debugging/SKILL.md) | 先复现再定位，禁止靠猜改代码 | 修 bug、排查线上异常 |
 | [`humanize-writing`](skills/humanize-writing/SKILL.md) | 清掉中文里的套话、翻译腔和空形容词，只管语言层 | 写或改任何中文内容、被要求“说人话” |
 | [`tech-blog-writing`](skills/tech-blog-writing/SKILL.md) | 讲机制、讲取舍的技术博客写法，图必须是真图片文件 | 写博客、做原理科普、整理架构说明 |
+
+## 示例技能
+
+`examples/` 下这四个是我写来给仓库撑结构用的，没在真实项目里长期跑过，所以不放进安装范围。它们的格式和正文照旧，想参考或直接拷走都可以，用的时候自己判断。
+
+| 技能 | 做什么 |
+| --- | --- |
+| [`code-review`](examples/code-review/SKILL.md) | 按严重级别审 diff，每条结论带 `path:line` 和改法 |
+| [`conventional-commits`](examples/conventional-commits/SKILL.md) | 从暂存区改动生成 Conventional Commits 格式的提交信息 |
+| [`api-design-review`](examples/api-design-review/SKILL.md) | 用检查表审 HTTP API 的命名、状态码、分页和错误模型 |
+| [`systematic-debugging`](examples/systematic-debugging/SKILL.md) | 先复现再定位，禁止靠猜改代码 |
 
 ## 安装
 
@@ -68,20 +82,20 @@ claude plugin marketplace add shl6688/skills
 claude plugin install skills@shl6688-skills
 ```
 
-会话里等价：`/plugin marketplace add shl6688/skills`。插件安装后技能名带前缀，例如 `/skills:code-review`。
+会话里等价：`/plugin marketplace add shl6688/skills`。插件安装后技能名带前缀，例如 `/skills:humanize-writing`。
 
 ### 方式三：手动拷
 
 ```bash
 git clone https://github.com/shl6688/skills.git
-cp -r skills/code-review ~/.claude/skills/
+cp -r skills/humanize-writing ~/.claude/skills/
 ```
 
 Windows 上用 PowerShell：
 
 ```powershell
 git clone https://github.com/shl6688/skills.git
-Copy-Item -Recurse skills/code-review "$env:USERPROFILE\.claude\skills\"
+Copy-Item -Recurse skills/humanize-writing "$env:USERPROFILE\.claude\skills\"
 ```
 
 常见放置位置：
@@ -120,9 +134,9 @@ node scripts/validate-skills.mjs
 
 - 目录布局按 [Agent Skills 规范](https://agentskills.io/specification)：`skills/<name>/SKILL.md`，可选 `scripts/`、`references/`、`assets/`。
 - frontmatter 只用规范定义的字段：`name`、`description`、`license`、`compatibility`、`metadata`、`allowed-tools`。版本号和标签放进 `metadata`，不占顶层键。
-- skills CLI 在 `skills/` 下三层范围内查找 `SKILL.md`。本仓库用 `npx skills add . --list` 实测能列出全部 6 个技能。
-- `.claude-plugin/marketplace.json` 加 `plugin.json` 让同一个仓库也能作为 Claude Code 插件市场安装。
-- CI 每次 push 跑 `node scripts/validate-skills.mjs`，检查规范字段、命名、描述长度、相对链接，以及两个插件 manifest 的必填项和路径。
+- skills CLI 在 `skills/` 下三层范围内查找 `SKILL.md`，`examples/` 和 `templates/` 不在默认路径里，所以 `npx skills add . --list` 只列出 2 个。加 `--full-depth` 会把示例和模板一起列出来（共 7 个），日常安装别用这个开关。
+- `.claude-plugin/marketplace.json` 加 `plugin.json` 让同一个仓库也能作为 Claude Code 插件市场安装，插件默认扫描的同样只有 `skills/`。
+- CI 每次 push 跑 `node scripts/validate-skills.mjs`，分别校验 `skills/`、`examples/`、`templates/` 三个目录，另外检查两个插件 manifest 的必填项和路径。
 
 `skills.sh` 目录站点什么时候收录新仓库不由我控制，`npx skills find` 搜不到时不影响按 `shl6688/skills` 直接安装。
 
